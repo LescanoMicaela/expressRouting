@@ -10,6 +10,19 @@ var port    =   process.env.PORT || 8080;
 
 // ROUTES
 // ==============================================
+app.route('/login')
+
+    // show the form (GET http://localhost:8080/login)
+    .get(function(req, res) {
+        res.send('this is the login form');
+    })
+
+    // process the form (POST http://localhost:8080/login)
+    .post(function(req, res) {
+        console.log('processing');
+        res.send('processing the login form!');
+    });
+
 
 
 // we'll create our routes here
@@ -39,6 +52,19 @@ router.get('/about', function(req, res) {
 // test route page (http://localhost:8080/test)
 router.get('/test', function(req,res){
     res.send('Hello World!');
+});
+
+// route middleware to validate :name
+router.param('name', function(req, res, next, name) {
+    // do validation on name here
+    // blah blah validation
+    // log something so we know its working
+    console.log('doing name validations on ' + name);
+
+    // once validation is done save the new item in the req
+    req.name = name;
+    // go to the next thing
+    next(); 
 });
 
 // route with parameters (http://localhost:8080/hello/:name)
