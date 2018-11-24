@@ -36,10 +36,16 @@ router.get('/about', function(req, res) {
     res.send('im the about page!'); 
 });
 
-// test route page (http://localhost:8080/about)
+// test route page (http://localhost:8080/test)
 router.get('/test', function(req,res){
     res.send('Hello World!');
 });
+
+// route with parameters (http://localhost:8080/hello/:name)
+router.get('/hello/:name', function(req, res) {
+    res.send('hello ' + req.params.name + '!');
+});
+
 // apply the routes to our application
 app.use('/', router);
 
